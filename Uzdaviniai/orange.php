@@ -1,5 +1,5 @@
 <?php
-// 1.
+require __DIR__ . '/bootstrap.php';
 $backgroundColor = 'orange';
 if(!empty($_GET)) {
     if($_GET['color'] == 1){

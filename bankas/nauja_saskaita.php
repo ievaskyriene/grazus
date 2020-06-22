@@ -39,7 +39,6 @@ if(isset($_GET['action'])){
 } 
 
 ?>
-
 <div>
 <form action="" method="get">
 Įveskite varda <input type="text" name="vardas" value = "<?= $_GET['vardas'] ?? '' ?>">

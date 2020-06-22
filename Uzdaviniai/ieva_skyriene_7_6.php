@@ -7,6 +7,7 @@
 </form>
 
 <?php
+require __DIR__ . '/bootstrap.php';
 
 if(!empty($_GET) && isset($_GET['button']) ){
     echo "<div style='background-color: green; width: 100%; height: 100vh'></div>";

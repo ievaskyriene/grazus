@@ -4,6 +4,7 @@
 </form>
 
 <?php
+require __DIR__ . '/bootstrap.php';
 if (!empty($_GET) && isset($_GET['color'])){
 $color = $_GET['color'];}
 else {$color = 'black';}

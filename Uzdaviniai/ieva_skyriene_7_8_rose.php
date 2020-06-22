@@ -1,7 +1,7 @@
 <?php
 
 if (!empty($_GET)) {
-    header("Location: http://192.168.64.2/grazus/ieva_skyriene_7_8_pink.php");
+    header("Location:$URL"."ieva_skyriene_7_8_pink.php");
     die();
 }
 
