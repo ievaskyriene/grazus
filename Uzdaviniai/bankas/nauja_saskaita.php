@@ -1,4 +1,5 @@
 <?php
+require __DIR__ . '/bootstrap.php';
 
 $bankoKodas = 73000;
 $kontroliniaiSkaiciai = rand(0,9).rand(0,9);
@@ -50,5 +51,3 @@ if(isset($_GET['action'])){
 <button type="submit" name="action" value="">Atidaryti saskaita</button>
 </form>
 </div>
-
-

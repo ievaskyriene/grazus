@@ -1,37 +1,90 @@
+
 <?php
 
 class Barsukas extends MiskoTevas
 {
     public $kailis = 'juodas';
-    private $akiuSkaicius = 3;
+    private $akiuSkaicius = 2;
 
-    public function __construct($kailis = 'raudonas'){  //konstruktorius apraomas taip, bet egzamine dar vis yra klausimas kai konstruktorius aprasomas klases pavadinimu
-        $this->kailis = $kailis;
+
+
+    public function __construct(...$params)
+    {
+        // MiskoTevas::__construct(...$params);
+
+        // echo MiskoTevas::$vardas;
+        
+        echo 'Barsuko';
+        
+        // if (count($params) == 1) {
+        //     $this->one(...$params);
+        // }
+        // if (count($params) == 2) {
+        //     $this->two(...$params);
+        // }
     }
 
-    public function __call($name, $arguments){  //sitas daznai naudojamas
+    public function __clone()
+    {
+        echo 'BBBBBB';
+    }
+
+    public function __call($name, $arguments) 
+    {
         echo $name;
     }
+
+    public function __set($name, $params)
+    {
+
+            return $this->balsas();
+
+
+    }
+
+
+    public function one(...$params)
+    {
+        $this->kailis = $params[0];
+    }
+
+
+    public function two(...$params)
+    {
+        $this->akiuSkaicius = $params[1];
+    }
+
+
 
     public function balsas()
     {
         echo '<br><br><br>Bar Bar<br><br><br>';
-        return $this; // this yra objekto placeholderis
+        return $this;
     }
 
-    public function setAkiuSkaicius(int $akiuSkaicius)
-    {   
-        if($akiuSkaicius > 2){
-            echo '<br><br><br>BLOGAI<br><br><br>';
+
+    public function setAkiuSkaicius($akiuSkaicius = 2)
+    {
+        if ($akiuSkaicius > 2) {
+            echo '<br><br><br>BLOGAI!<br><br><br>';
             return;
         }
-        $this -> akiuSkaicius = $akiuSkaicius;
+        $this->akiuSkaicius = $akiuSkaicius;
     }
 
+
     public function getAkiuSkaicius()
-    {   
-        return $this -> akiuSkaicius;
+    {
+        return $this->akiuSkaicius;
     }
+
+
+
+
+
+
+
+
 
 }
 
