@@ -44,14 +44,7 @@ if(isset($_POST["submit"]) && !empty($_POST)){
     echo '<pre>';
     print_r($data); 
     $data[] = ['name' => $_POST['vardas'], 'surname' => $_POST['pavarde'], 'ID' => $_POST['asmenskodas'], 'IBAN' => generateIBAN(), 'lesos'=>0];
-    $newList = [
-        'name'=>$name,
-        'surname'=> $surname,
-        'ID'=> $id,
-        'IBAN'=>$account,
-        'lesos'=>0
-    ];
-    $data = $newList;
+  
     file_put_contents(__DIR__ .'/data.json', json_encode($data));
     
     $_SESSION['note'] = 'Sukurta nauja saskaita';
