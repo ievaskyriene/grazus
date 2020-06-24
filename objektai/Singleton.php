@@ -1,4 +1,7 @@
 <?php
+
+namespace GrazusMeskenas; //jie irgi prasideda is didziosio raides
+
 class Singleton
 {
     public $shop = [];
@@ -18,7 +21,7 @@ class Singleton
 
     private function __clone(){}
 
-    private function __sleep(){} ///taip apsaugom nuo serializavimo 
-    private function __wakeup(){} ///arba taip apsaugom nuo serializavimo 
+    //private function __sleep(){} ///taip apsaugom nuo serializavimo 
+   // private function __wakeup(){} ///arba taip apsaugom nuo serializavimo 
 
 }
