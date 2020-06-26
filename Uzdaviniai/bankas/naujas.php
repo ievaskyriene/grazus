@@ -1,0 +1,141 @@
+<?php
+
+require __DIR__ . '/bootstrap.php';
+$data = json_decode(file_get_contents(__DIR__ .'/data.json'),1);
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="./css/reset.css">
+    
+</head>
+<style>
+
+table{
+  font-family: 'Montserrat', sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table td, table th {
+ font-family: 'Montserrat', sans-serif;
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+table tr:hover {background-color: #ddd;}
+
+table th {
+  font-family: 'Montserrat', sans-serif;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #284646;
+  color: white;
+}
+
+button {
+    font-family: 'Montserrat', sans-serif;
+    width: 100px;
+}
+</style>
+<body>
+
+<table>
+    <tr>
+        <th >Vardas</th>
+        <th>Pavarde</th> 
+        <th>Saskaita</th>
+        <th>Asmens kodas</th>
+        <th>Veiksmai</th>
+    </div>
+    <?php
+    function sortdata($arr){
+        for ($i=0; $i<count($arr)-1; $i++){
+          
+                for($j=$i+1; $j<count($arr); $j++){
+                    if($arr[$i]['surname'] > $arr[$j]['surname']){
+                        $temp = $arr[$i];
+                        $arr[$i] = $arr[$j];
+                        $arr[$j] = $temp;
+                    }
+                }
+            
+        }
+        return $arr;
+    }
+    $data =sortdata($data);
+
+    foreach ($data as $user) {
+        ?>
+            <tr>
+                <td><?=$user['name']?></td>
+                <td><?=$user['surname']?></td>
+                <td><?=$user['IBAN']?></td>
+                <td><?=$user['ID']?></td>
+                <td>
+                    <button  type="submit" name="delete" value=<?php $user['IBAN']?> >Trinti</button>                    
+                    <form action="./inesti_lesas.php" method="post">
+                        <input type="hidden" name="ID" value=<?php $user['ID']?>readonly>    
+                        <button type="submit" name="inesti">Inesti</button>
+                    </form>
+                    <form action="./nuimti_lesas.php" method="post">
+                        <input type="hidden" name="ID" value=<?$user['ID']?> readonly>    
+                        <button type="submit" name="nuimti">Nuimti</button>
+                    </form>
+                </td>
+            </tr>
+        </div>
+        <?php
+    }
+
+    ?> </table>
+
+<?php
+
+if(array_key_exists('delete', $_POST)){
+    foreach($data as $key => $value){
+        if($_POST['delete'] == $value['IBAN']){
+            if($value['lesos'] > 0){
+                $_SESSION['note'] = 'Istrinti ne tuscios saskaitos negalima';
+            }else{
+                array_splice($data, $key, 1);
+                $_SESSION['note'] = 'Saskaita istrinta';
+             //   header('Location: http://localhost:8080/grazus/Uzdaviniai/bankas/saskaitu_sarasas.php'); // GET
+    //die();
+            }
+        }
+        
+    }
+}
+
+file_put_contents(__DIR__ .'/data.json', json_encode($data));
+?>
+<div style="color:red">
+<?php
+if(isset($_SESSION['note'])) {
+    echo $_SESSION['note'];
+    unset($_SESSION['note']);
+}
+
+// </div>
+// </form>
+// </div>
+// <form action="./inesti_lesas.php" method="post">
+//     <input type="hidden" name="ID" value="" readonly>
+//     <button type="submit" name="inesti"></button>
+// </form>
+// <form action="./nuimti_lesas.php" method="post">
+//     <input type="hidden" name="ID" value="" readonly>
+//     <button type="submit" name="nuimti"></button>
+// </form>
+// </body>
+// </html>
+
+// 

@@ -1,7 +1,6 @@
 <?php
 require __DIR__ . '/bootstrap.php';
-echo '<pre>';
-print_r($_POST);
+
 
 
 function generateIBAN(){
@@ -18,7 +17,9 @@ function generateIBAN(){
     return $saskaita;
 } 
 
-if(isset($_POST["submit"]) && !empty($_POST)){
+
+if(isset($_POST["action"]) && !empty($_POST)){
+   // _d($_POST);
     if(isset($_POST["vardas"]) && strlen($_POST['vardas'])<3){
         $_SESSION['note'] = 'Iveskite teisinga varda';
        //header('Location: localhost:8080/grazus/Uzdaviniai/bankas/nauja_saskaita.php'); // GET
@@ -26,7 +27,7 @@ if(isset($_POST["submit"]) && !empty($_POST)){
     }
     if(isset($_POST['pavarde']) && strlen($_POST['pavarde'])<3){
         $_SESSION['note'] = 'Iveskite teisinga pavarde';
-        echo '<br>';
+       // echo '<br>';
     }
     if(isset($_POST['asmenskodas']) && strlen($_POST['asmenskodas']) != 11 ){
         $_SESSION['note'] = 'Iveskite teisinga asmens koda';
@@ -35,11 +36,15 @@ if(isset($_POST["submit"]) && !empty($_POST)){
     $data = json_decode(file_get_contents(__DIR__ .'/data.json'),1);
     foreach($data as $user){
         if($user['ID'] == $_POST['asmenskodas']){
+           // _d('toks asmens kodas jau yra');
             $_SESSION['note'] = 'Toks asmens kodas jau yra';
-             //header('Location: localhost:8080/grazus/Uzdaviniai/bankas/nauja_saskaita.php'); // GET
-        //die();
+            
+           // _d($_SESSION['note']);
+            header('Location: http://localhost:8080/grazus/Uzdaviniai/bankas/nauja_saskaita.php'); // GET
+        die();
         }
     }
+ 
        
     echo '<pre>';
     print_r($data); 
@@ -48,12 +53,10 @@ if(isset($_POST["submit"]) && !empty($_POST)){
     file_put_contents(__DIR__ .'/data.json', json_encode($data));
     
     $_SESSION['note'] = 'Sukurta nauja saskaita';
-        //header('Location: localhost:8080/grazus/Uzdaviniai/bankas/nauja_saskaita.php'); // GET
-        //die();
-
+        header('Location: http://localhost:8080/grazus/Uzdaviniai/bankas/nauja_saskaita.php'); // GET
+        die();
 
 }    
-
 
 ?>
 
@@ -79,10 +82,7 @@ if(isset($_POST["submit"]) && !empty($_POST)){
         <div class="form">
             <h1>Iveskite duomenis</h1>
                 <p class="message"><?php  
-                    if(isset($_SESSION['note'])) {
-                        echo $_SESSION['note'];
-                        unset($_SESSION['note']);
-                    }
+                   
                 ?></p><br>
             <form action="" method="post">
                 <label for="name"> Vardas: <br>
@@ -92,12 +92,12 @@ if(isset($_POST["submit"]) && !empty($_POST)){
                     <input type="text" name="pavarde"> <br>
                 </label>
                 <label for="ID"> Asmens kodas:  <br>
-                    <input type="number" name="asmenskodas" value="<?=$_POST['asmenskodas']?>"><br>
+                    <input type="number" name="asmenskodas" value=""><br>
                 </label>
                 <label for="account"> Saskaitos Numeris: <br>
                     <input type="text" name="saskaita" value="<?=generateIBAN()?>" readonly><br>
                 </label>
-                <button type="submit">Sukurti saskaita</button>
+                <button type="submit" name = "action">Sukurti saskaita</button>
             </form>
 
         </div>
