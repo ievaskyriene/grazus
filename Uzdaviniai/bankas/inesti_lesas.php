@@ -27,6 +27,7 @@ table{
   font-family: 'Montserrat', sans-serif;
   border-collapse: collapse;
   width: 100%;
+  margin-bottom:100px;
 }
 
 table td, table th {
@@ -49,6 +50,11 @@ table th {
 button {
     font-family: 'Montserrat', sans-serif;
     width: 100px;
+}
+
+menu{
+    font-family: 'Montserrat', sans-serif;
+    
 }
 </style>
 <body>
@@ -86,6 +92,15 @@ button {
     ?> 
 </table>
 
+<div class="menu">
+        <a href="./nauja_saskaita.php">Sukurti nauja saskaita</a><br>
+        <a href="./saskaitu_sarasas2.php">Perziureti saskaitu sarasa <i class="text-icon icon-external-link"></i></a><br>
+        <!-- <a href="./login.php?logout">Atsijungti <i class="icon-signout text-icon"></i> </a><br> -->
+    </div>
+    </body>
+</html>
+    
+
 <?php
 
 
@@ -103,6 +118,6 @@ header('Location: http://localhost:8080/grazus/Uzdaviniai/bankas/inesti_lesas.ph
        die();
 }
 
-
+?>
 
 

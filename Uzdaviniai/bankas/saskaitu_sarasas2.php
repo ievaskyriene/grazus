@@ -108,6 +108,14 @@ button {
 <!-- </form>     -->
 </table>
 
+<div class="menu" style="padding-top:200px;">
+        <a href="./nauja_saskaita.php">Sukurti nauja saskaita</a><br>
+        <a href="./saskaitu_sarasas2.php">Perziureti saskaitu sarasa <i class="text-icon icon-external-link"></i></a><br>
+        <!-- <a href="./login.php?logout">Atsijungti <i class="icon-signout text-icon"></i> </a><br> -->
+    </div>
+    </body>
+</html>
+
 <?php
 
 if(array_key_exists('delete', $_POST)){
@@ -118,14 +126,15 @@ if(array_key_exists('delete', $_POST)){
             }else{
                 array_splice($data, $key, 1);
                 $_SESSION['note'] = 'Saskaita istrinta';
-             //header('Location: http://localhost:8080/grazus/Uzdaviniai/bankas/saskaitu_sarasas2.php'); // GET
-    //die();
+                file_put_contents(__DIR__ .'/data.json', json_encode($data));
+                header('Location: http://localhost:8080/grazus/Uzdaviniai/bankas/saskaitu_sarasas2.php'); // GET
+                die();
             }
         }
     }
 }
 
-file_put_contents(__DIR__ .'/data.json', json_encode($data));
+
 ?>
 <div style="color:red">
 <?php

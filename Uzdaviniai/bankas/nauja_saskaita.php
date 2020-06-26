@@ -119,10 +119,7 @@ if(isset($_POST["action"]) && !empty($_POST)){
         font-family: 'Montserrat', sans-serif;
     }
 
-
-
 </style>
-
 <body>
     <div class="container">
         <div class="form">
@@ -143,11 +140,14 @@ if(isset($_POST["action"]) && !empty($_POST)){
                 <label for="ID"> Asmens kodas:  <br>
                     <input type="number" name="asmenskodas" required><br>
                 </label>
-
                 <button type="submit" name = "action">Sukurti saskaita</button>
             </form>
         </div>
     </div>
 
+    <div class="menu"  style="padding-top:200px;">
+        <a href="./saskaitu_sarasas2.php">Perziureti saskaitu sarasa <i class="text-icon icon-external-link"></i></a><br>
+        <!-- <a href="./login.php?logout">Atsijungti <i class="icon-signout text-icon"></i> </a><br> -->
+    </div>
 </body>
 </html>
