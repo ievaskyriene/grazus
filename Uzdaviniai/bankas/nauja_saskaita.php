@@ -2,7 +2,6 @@
 require __DIR__ . '/bootstrap.php';
 
 
-
 function generateIBAN(){
     $bankoKodas = 73000;
     $kontroliniaiSkaiciai = rand(0,9).rand(0,9);
@@ -17,55 +16,42 @@ function generateIBAN(){
     return $saskaita;
 } 
 
-
 if(isset($_POST["action"]) && !empty($_POST)){
-   // _d($_POST);
-    if(isset($_POST["vardas"]) && strlen($_POST['vardas'])<3){
+    if(strlen($_POST['vardas'])<3){
         $_SESSION['note'] = 'Iveskite teisinga varda';
-       //header('Location: localhost:8080/grazus/Uzdaviniai/bankas/nauja_saskaita.php'); // GET
-        //die();
+       header('Location: http://localhost:8080/grazus/Uzdaviniai/bankas/nauja_saskaita.php'); // GET
+    die();
     }
-    if(isset($_POST['pavarde']) && strlen($_POST['pavarde'])<3){
+    
+    if(strlen($_POST['pavarde'])<3){
         $_SESSION['note'] = 'Iveskite teisinga pavarde';
-       // echo '<br>';
+        header('Location: http://localhost:8080/grazus/Uzdaviniai/bankas/nauja_saskaita.php'); // GET
+    die();
     }
     if(isset($_POST['asmenskodas']) && strlen($_POST['asmenskodas']) != 11 ){
         $_SESSION['note'] = 'Iveskite teisinga asmens koda';
+        header('Location: http://localhost:8080/grazus/Uzdaviniai/bankas/nauja_saskaita.php'); // GET
+        die();
     }
 
     $data = json_decode(file_get_contents(__DIR__ .'/data.json'),1);
     foreach($data as $user){
         if($user['ID'] == $_POST['asmenskodas']){
-           // _d('toks asmens kodas jau yra');
             $_SESSION['note'] = 'Toks asmens kodas jau yra';
-            
-           // _d($_SESSION['note']);
             header('Location: http://localhost:8080/grazus/Uzdaviniai/bankas/nauja_saskaita.php'); // GET
         die();
         }
     }
- 
-       
-    echo '<pre>';
-    print_r($data); 
-    $data[] = ['name' => $_POST['vardas'], 'surname' => $_POST['pavarde'], 'ID' => $_POST['asmenskodas'], 'IBAN' => generateIBAN(), 'lesos'=>0];
   
+    $data[] = ['name' => $_POST['vardas'], 'surname' => $_POST['pavarde'], 'ID' => $_POST['asmenskodas'], 'IBAN' => generateIBAN(), 'lesos'=>0];
     file_put_contents(__DIR__ .'/data.json', json_encode($data));
-    
     $_SESSION['note'] = 'Sukurta nauja saskaita';
         header('Location: http://localhost:8080/grazus/Uzdaviniai/bankas/nauja_saskaita.php'); // GET
         die();
-
 }    
 
 ?>
 
-<?php if(isset($_SESSION['note'])) {
-    echo $_SESSION['note'];
-    unset($_SESSION['note']);
-}
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,17 +68,20 @@ if(isset($_POST["action"]) && !empty($_POST)){
         <div class="form">
             <h1>Iveskite duomenis</h1>
                 <p class="message"><?php  
-                   
+                   if(isset($_SESSION['note'])) {
+                    echo $_SESSION['note'];
+                    unset($_SESSION['note']);
+                }
                 ?></p><br>
             <form action="" method="post">
                 <label for="name"> Vardas: <br>
-                    <input type="text" name="vardas"> <br>
+                    <input type="text" name="vardas" required> <br>
                 </label> 
                 <label for="surname"> Pavarde: <br>
-                    <input type="text" name="pavarde"> <br>
+                    <input type="text" name="pavarde" required> <br>
                 </label>
                 <label for="ID"> Asmens kodas:  <br>
-                    <input type="number" name="asmenskodas" value=""><br>
+                    <input type="number" name="asmenskodas" required><br>
                 </label>
                 <label for="account"> Saskaitos Numeris: <br>
                     <input type="text" name="saskaita" value="<?=generateIBAN()?>" readonly><br>

@@ -27,7 +27,7 @@ foreach ($data as $user) {
     echo '<form action="http://localhost:8080/grazus/Uzdaviniai/bankas/inesti_lesas.php" method="post">
   
     <input type="hidden" name="ID" value="'.$user['ID'].'" readonly>
-    <input type="number" name="inesti" value="">
+    <input type="number" name="prideti" value="">
  
     <button type="submit">Prideti</button>
 </form>';
