@@ -80,15 +80,17 @@ button {
                 <td><?=$user['IBAN']?></td>
                 <td><?=$user['ID']?></td>
                 <td>
-                    <button  type="submit" name="delete" value=<?php $user['IBAN']?> >Trinti</button>                    
-                    <form action="./inesti_lesas.php" method="post">
-                        <input type="hidden" name="ID" value=<?php $user['ID']?>readonly>    
+                    <?php
+                    echo '<button  type="submit" name="delete" value='.$user['IBAN'].'>Trinti</button>';                   
+                    echo '<form action="./inesti_lesas.php" method="post">
+                        <input type="hidden" name="ID" value='.$user['ID'].'readonly>    
                         <button type="submit" name="inesti">Inesti</button>
                     </form>
                     <form action="./nuimti_lesas.php" method="post">
-                        <input type="hidden" name="ID" value=<?$user['ID']?> readonly>    
+                        <input type="hidden" name="ID" value='.$user['ID'].'readonly>    
                         <button type="submit" name="nuimti">Nuimti</button>
-                    </form>
+                    </form>';
+                    ?>
                 </td>
             </tr>
         </div>
@@ -107,7 +109,7 @@ if(array_key_exists('delete', $_POST)){
             }else{
                 array_splice($data, $key, 1);
                 $_SESSION['note'] = 'Saskaita istrinta';
-             //   header('Location: http://localhost:8080/grazus/Uzdaviniai/bankas/saskaitu_sarasas.php'); // GET
+             //   header('Location: http://localhost:8080/grazus/Uzdaviniai/bankas/saskaitu_sarasas2.php'); // GET
     //die();
             }
         }
