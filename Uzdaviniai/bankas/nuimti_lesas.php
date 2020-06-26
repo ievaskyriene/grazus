@@ -35,11 +35,14 @@ foreach ($data as $user) {
 if(array_key_exists('nuimti', $_POST)){
     foreach ($data as &$user) {
    
-        if($user['ID']== $_POST['ID']){
-            _dc($user);
+        if($user['ID']== $_POST['ID'] &&  $user['lesos'] > 0){
             $user['lesos']-=(int)$_POST['nuimti'];   
-            _d($user['lesos']);
-            _d((int)$_POST['nuimti']);
+            if ($user['lesos'] < 0){
+                $_SESSION['note'] = 'Suma negali buti mazesne uz nuli';
+                header('Location: http://localhost:8080/grazus/Uzdaviniai/bankas/nuimti_lesas.php'); // GET
+             die();
+            }
+           
         }
     }
 
@@ -47,4 +50,9 @@ if(array_key_exists('nuimti', $_POST)){
 
     header('Location: http://localhost:8080/grazus/Uzdaviniai/bankas/nuimti_lesas.php?ID='.$_POST['ID']); // GET
         die();
+    }
+
+    if(isset($_SESSION['note'])) {
+        echo $_SESSION['note'];
+        unset($_SESSION['note']);
     }

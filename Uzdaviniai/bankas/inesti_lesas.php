@@ -8,41 +8,92 @@ $id= $_POST['ID'];
 }
 
 if(!isset($_POST['ID'])){ 
-   $id=$_GET['ID'];
+    $id=$_GET['ID'];
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="./css/reset.css">
+    
+</head>
+<style>
+
+table{
+  font-family: 'Montserrat', sans-serif;
+  border-collapse: collapse;
+  width: 100%;
 }
 
-foreach ($data as $user) {
-    if($user['ID']== $id){
-        _dc($user);
-        echo $user['name'];
-    echo $user['surname'];
-    echo'<br>';
-    echo $user['ID'];
-    echo'<br>';
-    echo $user['IBAN'];
-    echo'<br>';
-    echo $user['lesos'];
-    echo'<br>';
-   
-    echo '<form action="http://localhost:8080/grazus/Uzdaviniai/bankas/inesti_lesas.php" method="post">
-  
-    <input type="hidden" name="ID" value="'.$user['ID'].'" readonly>
-    <input type="number" name="prideti" value="">
- 
-    <button type="submit">Prideti</button>
-</form>';
-        
+table td, table th {
+ font-family: 'Montserrat', sans-serif;
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+table tr:hover {background-color: #ddd;}
+
+table th {
+  font-family: 'Montserrat', sans-serif;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #284646;
+  color: white;
+}
+
+button {
+    font-family: 'Montserrat', sans-serif;
+    width: 100px;
+}
+</style>
+<body>
+<table>
+    <tr>
+        <th >Vardas</th>
+        <th>Pavarde</th> 
+        <th>Saskaita</th>
+        <th>Lesos</th>
+        <th>Veiksmai</th>
+    </div>
+    <?php
+    foreach ($data as $user) {
+        if($user['ID']== $id){
+        ?> 
+            <tr>
+            <td><?=$user['name']?></td>
+            <td><?=$user['surname']?></td>
+            <td><?=$user['IBAN']?></td>
+            <td><?=$user['lesos']?></td>
+            <td>
+            <?php
+    echo '<form action="./inesti_lesas.php" method="post">
+        <input type="hidden" name="ID" value="'.$user['ID'].'" readonly>
+        <input type="number" name="prideti" value="">
+        <button type="submit">Prideti</button>
+    </form>';
+    ?>
+    </td>
+    </tr>
+    </div>
+    <?php
     }
 }
+    ?> 
+</table>
+
+<?php
+
+
 
 if(array_key_exists('prideti', $_POST)){
     foreach ($data as &$user) {
-   
         if($user['ID']== $_POST['ID']){
-            _dc($user);
             $user['lesos']+=(int)$_POST['prideti'];   
-            _d($user['lesos']);
-            _d((int)$_POST['prideti']);
         }
     }
 
@@ -51,9 +102,6 @@ if(array_key_exists('prideti', $_POST)){
 header('Location: http://localhost:8080/grazus/Uzdaviniai/bankas/inesti_lesas.php?ID='.$_POST['ID']); // GET
        die();
 }
-
-
-
 
 
 

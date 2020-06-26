@@ -118,11 +118,10 @@ if(array_key_exists('delete', $_POST)){
             }else{
                 array_splice($data, $key, 1);
                 $_SESSION['note'] = 'Saskaita istrinta';
-            // header('Location: http://localhost:8080/grazus/Uzdaviniai/bankas/saskaitu_sarasas2.php'); // GET
+             //header('Location: http://localhost:8080/grazus/Uzdaviniai/bankas/saskaitu_sarasas2.php'); // GET
     //die();
             }
         }
-        
     }
 }
 
