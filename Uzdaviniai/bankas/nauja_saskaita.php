@@ -1,6 +1,11 @@
 <?php
 require __DIR__ . '/bootstrap.php';
 
+if (!isset($_SESSION['login']) || $_SESSION['login'] != 1) {
+    header('Location: ./login.php');
+    die();
+}
+
 function generateIBAN(){
     $bankoKodas = 73000;
     $kontroliniaiSkaiciai = rand(0,9).rand(0,9);
@@ -39,15 +44,15 @@ function valid_ak($ak){
 
 if(isset($_POST["action"]) && !empty($_POST)){
     if(strlen($_POST['vardas'])<3){
-    $_SESSION['note'] = 'Iveskite teisinga varda';
-       header('Location: http://localhost:8080/grazus/Uzdaviniai/bankas/nauja_saskaita.php'); // GET
-    die();
+        $_SESSION['note'] = 'Iveskite teisinga varda';
+        header('Location: http://localhost:8080/grazus/Uzdaviniai/bankas/nauja_saskaita.php'); // GET
+        die();
     }
     
     if(strlen($_POST['pavarde'])<3){
         $_SESSION['note'] = 'Iveskite teisinga pavarde';
         header('Location: http://localhost:8080/grazus/Uzdaviniai/bankas/nauja_saskaita.php'); // GET
-    die();
+        die();
     }
     if(valid_ak($_POST['asmenskodas']) != true){
         $_SESSION['note'] = 'Iveskite teisinga asmens koda';
@@ -60,23 +65,21 @@ if(isset($_POST["action"]) && !empty($_POST)){
         if($user['ID'] == $_POST['asmenskodas']){
             $_SESSION['note'] = 'Toks asmens kodas jau yra';
             header('Location: http://localhost:8080/grazus/Uzdaviniai/bankas/nauja_saskaita.php'); // GET
-        die();
+            die();
         }
     }
   
     $data[] = ['name' => $_POST['vardas'], 'surname' => $_POST['pavarde'], 'ID' => $_POST['asmenskodas'], 'IBAN' => generateIBAN(), 'lesos'=>0];
     file_put_contents(__DIR__ .'/data.json', json_encode($data));
-
     $_SESSION['note'] = 'Sukurta nauja saskaita'.'<br>'.'
     <label class = "saskaita" for="account"> Saskaitos Numeris: <br>
         <input class = "account" type="text" name="saskaita" value="'.generateIBAN().'" readonly><br>
     </label>';
-        header('Location: http://localhost:8080/grazus/Uzdaviniai/bankas/nauja_saskaita.php'); // GET
-        die();
+    header('Location: http://localhost:8080/grazus/Uzdaviniai/bankas/nauja_saskaita.php'); // GET
+    die();
 }    
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,7 +89,6 @@ if(isset($_POST["action"]) && !empty($_POST)){
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/main.css">
-    
 </head>
 <style>
     .container{
@@ -147,7 +149,7 @@ if(isset($_POST["action"]) && !empty($_POST)){
 
     <div class="menu"  style="padding-top:200px;">
         <a href="./saskaitu_sarasas2.php">Perziureti saskaitu sarasa <i class="text-icon icon-external-link"></i></a><br>
-        <!-- <a href="./login.php?logout">Atsijungti <i class="icon-signout text-icon"></i> </a><br> -->
+        <a href="./login.php?logout">Atsijungti</a><br>
     </div>
 </body>
 </html>
