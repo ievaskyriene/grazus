@@ -33,16 +33,21 @@ class App {
                         <input class = "account" type="text" name="saskaita" value="'.Generate::generateIBAN().'" readonly><br>
                     </label>';
                     App::redirect('users/create');
+                 
                 }
 
-                if (self::$params[1] == 'list') {
+            
+                // if (self::$params[1] == 'list') {
                  
-                    require(self::VIEW_DIR.self::$params[0].'/'.self::$params[1].'.php');
-                }
+                //     require(self::VIEW_DIR.self::$params[0].'/'.self::$params[1].'.php');
+                // }
 
                 if (file_exists(self::VIEW_DIR.self::$params[0].'/'.self::$params[1].'.php')) {
                     require(self::VIEW_DIR.self::$params[0].'/'.self::$params[1].'.php');
                 }
+
+
+               
             }
         }
         elseif (count(self::$params) == 1) {

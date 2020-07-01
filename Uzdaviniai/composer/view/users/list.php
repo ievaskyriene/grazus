@@ -44,9 +44,7 @@ button {
 }
 </style>
 
-
 <body>
-
 <table>
     <tr>
         <th >Vardas</th>
@@ -81,13 +79,11 @@ button {
                     <td><?=$user['ID']?></td>
                     <td>
                         <?php
-
                         echo '
                         <form action="" method="post">
                         <button type="submit" name="delete" value="'.$user['IBAN'].'">Trinti</button> 
                         </form>
-
-                        <form action="./inesti_lesas.php" method="post">
+                        <form action="./addFunds.php" method="post">
                             <input type="hidden" name="ID" value="'.$user['ID'].'"readonly>    
                             <button type="submit" name="inesti">Inesti</button>
                         </form>
@@ -128,7 +124,7 @@ if(array_key_exists('delete', $_POST)){
                 // array_splice($data, $key, 1);
                 $_SESSION['note'] = 'Saskaita istrinta';
                 file_put_contents('/opt/lampp/htdocs/grazus/Uzdaviniai/composer/app/data2.json', json_encode($data));
-                //App::redirect('users/list');
+                
                 header('Location: http://localhost:8080/grazus/Uzdaviniai/composer/public/users/list'); // GET
                 die();
             }
@@ -138,7 +134,6 @@ if(array_key_exists('delete', $_POST)){
 
 
 ?>
-
 <div style="color:red">
 <?php
 if(isset($_SESSION['note'])) {

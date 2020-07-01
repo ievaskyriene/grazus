@@ -1,7 +1,5 @@
 <?php
 
-use 
-echo"lalla";
 
 // if (!isset($_SESSION['login']) || $_SESSION['login'] != 1) {
 //     header('Location: ./login.php');
