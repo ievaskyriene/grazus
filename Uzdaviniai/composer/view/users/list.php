@@ -124,12 +124,13 @@ if(array_key_exists('delete', $_POST)){
             if($value['lesos'] > 0){
                 $_SESSION['note'] = 'Istrinti ne tuscios saskaitos negalima';
             }else{
-                array_splice($data, $key, 1);
+                unset($data[$key]);
+                // array_splice($data, $key, 1);
                 $_SESSION['note'] = 'Saskaita istrinta';
                 file_put_contents('/opt/lampp/htdocs/grazus/Uzdaviniai/composer/app/data2.json', json_encode($data));
-                header('Location: http://localhost:8080/grazus/Uzdaviniai/composer/public/users/list/'); // GET
+                //App::redirect('users/list');
+                header('Location: http://localhost:8080/grazus/Uzdaviniai/composer/public/users/list'); // GET
                 die();
-                
             }
         }
     }
