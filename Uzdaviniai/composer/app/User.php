@@ -31,19 +31,21 @@ class User
             // }
           
        
-            $_SESSION['note'] = 'Sukurta nauja saskaita'.'<br>'.'
-            <label class = "saskaita" for="account"> Saskaitos Numeris: <br>
-                <input class = "account" type="text" name="saskaita" value="'.Generate::generateIBAN().'" readonly><br>
-            </label>';
-            App::redirect('users/create');
+      
         }  
 
         return 
         ['name' => $_POST['vardas'], 
-                'surname' => $_POST['pavarde'],
-                'ID' => $_POST['asmenskodas'],
-                'IBAN' =>  Generate::generateIBAN(),
-                'lesos' => 0
+        'surname' => $_POST['pavarde'],
+        'ID' => $_POST['asmenskodas'],
+        'IBAN' =>  Generate::generateIBAN(),
+        'lesos' => 0
         ];
+
+        // $_SESSION['note'] = 'Sukurta nauja saskaita'.'<br>'.'
+        // <label class = "saskaita" for="account"> Saskaitos Numeris: <br>
+        //     <input class = "account" type="text" name="saskaita" value="'.Generate::generateIBAN().'" readonly><br>
+        // </label>';
+        // App::redirect('users/create');
     }
 }

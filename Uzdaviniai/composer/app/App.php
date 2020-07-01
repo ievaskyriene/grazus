@@ -23,14 +23,18 @@ class App {
             if (self::$params[0] == 'users') {
 
                 if (self::$params[1] == 'addUser') {
-                    //$saskaita = generateIBAN();
+                   
                     $newUser = User::createNew();
                     $db = new DB;
                     $db->create($newUser);
 
-                    $_SESSION['note'] = 'Sukurta nauja saskaita'.'<br>';
-                    self::redirect('users/create'); 
+                    $_SESSION['note'] = 'Sukurta nauja saskaita'.'<br>'.'
+                    <label class = "saskaita" for="account"> Saskaitos Numeris: <br>
+                        <input class = "account" type="text" name="saskaita" value="'.Generate::generateIBAN().'" readonly><br>
+                    </label>';
+                    App::redirect('users/create');
                 }
+
                 if (self::$params[1] == 'list') {
                  
                     require(self::VIEW_DIR.self::$params[0].'/'.self::$params[1].'.php');

@@ -22,11 +22,12 @@ class JsonDb implements DataBase
     public function create(array $userData) : void
     {
         //$this->generateIBAN();
-        //$uuid = (string) Uuid::uuid4();
-        //$this->data[$uuid] = $userData;
-        $this->data[] = $userData;
+        $uuid = (string) Uuid::uuid4();
+        $this->data[$uuid] = $userData;
+       // $this->data[] = $userData;
 
         $this->save();
+
     }
  
     public function update(string $userId, array $userData) : void

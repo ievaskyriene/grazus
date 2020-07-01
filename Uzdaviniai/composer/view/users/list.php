@@ -12,7 +12,6 @@ $data = json_decode(file_get_contents('/opt/lampp/htdocs/grazus/Uzdaviniai/compo
     <title></title>
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link rel="stylesheet" href="./css/reset.css">
-    
 </head>
 <style>
 
@@ -53,7 +52,7 @@ button {
         <th>Saskaita</th>
         <th>Asmens kodas</th>
         <th>Veiksmai</th>
-    </div>
+    <div>
     <?php
     // function sortdata($arr){
     //     for ($i=0; $i<count($arr)-1; $i++){
@@ -111,8 +110,11 @@ button {
         <a href="./nauja_saskaita.php">Sukurti nauja saskaita</a><br>
         <a href="./saskaitu_sarasas2.php">Perziureti saskaitu sarasa <i class="text-icon icon-external-link"></i></a><br>
         <a href="./login.php?logout">Atsijungti</a><br>
-    </div>
+ </div>
+
+
     </body>
+
 </html>
 
 <?php
@@ -126,7 +128,9 @@ if(array_key_exists('delete', $_POST)){
                 array_splice($data, $key, 1);
                 $_SESSION['note'] = 'Saskaita istrinta';
                 file_put_contents('/opt/lampp/htdocs/grazus/Uzdaviniai/composer/app/data2.json', json_encode($data));
-                App::redirect('users/list');
+                header('Location: http://localhost:8080/grazus/Uzdaviniai/composer/public/users/list/'); // GET
+                die();
+                //App::redirect('users/list');
             }
         }
     }
@@ -134,9 +138,12 @@ if(array_key_exists('delete', $_POST)){
 
 
 ?>
+
 <div style="color:red">
 <?php
 if(isset($_SESSION['note'])) {
     echo $_SESSION['note'];
     unset($_SESSION['note']);
 }
+?>
+</div>
