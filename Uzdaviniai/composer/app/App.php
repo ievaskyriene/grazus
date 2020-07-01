@@ -5,7 +5,7 @@ use Main\Login;
 use Main\User;
 use App\DB\JsonDb as DB;
 
-//require '../app/Login.php';
+
 class App {
     const DIR = '/grazus/Uzdaviniai/composer/public/';
     const VIEW_DIR = './../view/';
@@ -30,6 +30,10 @@ class App {
 
                     $_SESSION['note'] = 'Sukurta nauja saskaita'.'<br>';
                     self::redirect('users/create'); 
+                }
+                if (self::$params[1] == 'list') {
+                 
+                    require(self::VIEW_DIR.self::$params[0].'/'.self::$params[1].'.php');
                 }
 
                 if (file_exists(self::VIEW_DIR.self::$params[0].'/'.self::$params[1].'.php')) {

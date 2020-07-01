@@ -1,12 +1,6 @@
 <?php
 
-require __DIR__ . '/bootstrap.php';
-
-if (!isset($_SESSION['login']) || $_SESSION['login'] != 1) {
-    header('Location: ./login.php');
-    die();
-}
-$data = json_decode(file_get_contents(__DIR__ .'/data.json'),1);
+$data = json_decode(file_get_contents('/opt/lampp/htdocs/grazus/Uzdaviniai/composer/app/data2.json'),1);
 
 ?>
 
@@ -61,21 +55,21 @@ button {
         <th>Veiksmai</th>
     </div>
     <?php
-    function sortdata($arr){
-        for ($i=0; $i<count($arr)-1; $i++){
+    // function sortdata($arr){
+    //     for ($i=0; $i<count($arr)-1; $i++){
           
-                for($j=$i+1; $j<count($arr); $j++){
-                    if($arr[$i]['surname'] > $arr[$j]['surname']){
-                        $temp = $arr[$i];
-                        $arr[$i] = $arr[$j];
-                        $arr[$j] = $temp;
-                    }
-                }
+    //             for($j=$i+1; $j<count($arr); $j++){
+    //                 if($arr[$i]['surname'] > $arr[$j]['surname']){
+    //                     $temp = $arr[$i];
+    //                     $arr[$i] = $arr[$j];
+    //                     $arr[$j] = $temp;
+    //                 }
+    //             }
 
-        }
-        return $arr;
-    }
-    $data =sortdata($data);
+    //     }
+    //     return $arr;
+    // }
+    // $data =sortdata($data);
     ?>
    
     <?php
@@ -131,9 +125,8 @@ if(array_key_exists('delete', $_POST)){
             }else{
                 array_splice($data, $key, 1);
                 $_SESSION['note'] = 'Saskaita istrinta';
-                file_put_contents(__DIR__ .'/data.json', json_encode($data));
-                header('Location: http://localhost:8080/grazus/Uzdaviniai/bankas/saskaitu_sarasas2.php'); // GET
-                die();
+                file_put_contents('/opt/lampp/htdocs/grazus/Uzdaviniai/composer/app/data2.json', json_encode($data));
+                App::redirect('users/list');
             }
         }
     }
@@ -147,4 +140,3 @@ if(isset($_SESSION['note'])) {
     echo $_SESSION['note'];
     unset($_SESSION['note']);
 }
-
