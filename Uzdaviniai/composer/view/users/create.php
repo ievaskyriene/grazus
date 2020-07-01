@@ -69,9 +69,9 @@ _dc ($_POST);
                 </label>
               
                 <button type="submit" name = "action">Sukurti saskaita</button>
-                <label for="IBAN"> saskaita:  <br>
+                <!-- <label for="IBAN"> saskaita:  <br>
                     <input type="number" name="asmenskodas" value = "<?=Generate::generateIBAN()?>"><br>
-                </label>
+                </label> -->
             </form>
         </div>
     </div>

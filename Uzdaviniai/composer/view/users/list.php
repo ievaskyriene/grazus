@@ -43,6 +43,8 @@ button {
     width: 100px;
 }
 </style>
+
+
 <body>
 
 <table>
@@ -53,51 +55,49 @@ button {
         <th>Asmens kodas</th>
         <th>Veiksmai</th>
     <div>
-    <?php
-    // function sortdata($arr){
-    //     for ($i=0; $i<count($arr)-1; $i++){
-          
-    //             for($j=$i+1; $j<count($arr); $j++){
-    //                 if($arr[$i]['surname'] > $arr[$j]['surname']){
-    //                     $temp = $arr[$i];
-    //                     $arr[$i] = $arr[$j];
-    //                     $arr[$j] = $temp;
-    //                 }
-    //             }
+        <?php
+        // function sortdata($arr){
+        //     for ($i=0; $i<count($arr)-1; $i++){
+            
+        //             for($j=$i+1; $j<count($arr); $j++){
+        //                 if($arr[$i]['surname'] > $arr[$j]['surname']){
+        //                     $temp = $arr[$i];
+        //                     $arr[$i] = $arr[$j];
+        //                     $arr[$j] = $temp;
+        //                 }
+        //             }
 
-    //     }
-    //     return $arr;
-    // }
-    // $data =sortdata($data);
-    ?>
-   
-    <?php
-    foreach ($data as $user) {
-        ?>
-            <tr>
-                <td><?=$user['name']?></td>
-                <td><?=$user['surname']?></td>
-                <td><?=$user['IBAN']?></td>
-                <td><?=$user['ID']?></td>
-                <td>
-                    <?php
+        //     }
+        //     return $arr;
+        // }
+        // $data =sortdata($data);
+        
+        foreach ($data as $user) {
+            ?>
+                <tr>
+                    <td><?=$user['name']?></td>
+                    <td><?=$user['surname']?></td>
+                    <td><?=$user['IBAN']?></td>
+                    <td><?=$user['ID']?></td>
+                    <td>
+                        <?php
 
-                    echo '
-                    <form action="" method="post">
-                    <button type="submit" name="delete" value="'.$user['IBAN'].'">Trinti</button> 
-                    </form>
+                        echo '
+                        <form action="" method="post">
+                        <button type="submit" name="delete" value="'.$user['IBAN'].'">Trinti</button> 
+                        </form>
 
-                    <form action="./inesti_lesas.php" method="post">
-                        <input type="hidden" name="ID" value="'.$user['ID'].'"readonly>    
-                        <button type="submit" name="inesti">Inesti</button>
-                    </form>
-                    <form action="./nuimti_lesas.php" method="post">
-                        <input type="hidden" name="ID" value="'.$user['ID'].'"readonly>    
-                        <button type="submit" name="nuimti">Nuimti</button>
-                    </form>';
-                    ?>
-                </td>
-            </tr>
+                        <form action="./inesti_lesas.php" method="post">
+                            <input type="hidden" name="ID" value="'.$user['ID'].'"readonly>    
+                            <button type="submit" name="inesti">Inesti</button>
+                        </form>
+                        <form action="./nuimti_lesas.php" method="post">
+                            <input type="hidden" name="ID" value="'.$user['ID'].'"readonly>    
+                            <button type="submit" name="nuimti">Nuimti</button>
+                        </form>';
+                        ?>
+                    </td>
+                </tr>
         </div>
         <?php
     }
@@ -106,14 +106,13 @@ button {
 
 </table>
 
-<div class="menu" style="padding-top:200px;">
+    <div class="menu" style="padding-top:200px;">
         <a href="./nauja_saskaita.php">Sukurti nauja saskaita</a><br>
         <a href="./saskaitu_sarasas2.php">Perziureti saskaitu sarasa <i class="text-icon icon-external-link"></i></a><br>
         <a href="./login.php?logout">Atsijungti</a><br>
- </div>
+    </div>
 
-
-    </body>
+</body>
 
 </html>
 
@@ -130,7 +129,7 @@ if(array_key_exists('delete', $_POST)){
                 file_put_contents('/opt/lampp/htdocs/grazus/Uzdaviniai/composer/app/data2.json', json_encode($data));
                 header('Location: http://localhost:8080/grazus/Uzdaviniai/composer/public/users/list/'); // GET
                 die();
-                //App::redirect('users/list');
+                
             }
         }
     }
