@@ -1,0 +1,19 @@
+{
+  "name": "ievaskyriene/composer",
+  "description": "Objektinio prisijungimo pavyzdys",
+  "autoload": {
+    "psr-4": {
+      "Main\\": "app",
+      "App\\DB\\": "app/db"
+    }
+  },
+  "authors": [
+    {
+      "name": "ieva Skyriene",
+      "email": "ieva.skyriene@gmail.com"
+    }
+  ],
+  "require": {
+    "ramsey/uuid": "^3.9"
+  }
+}
