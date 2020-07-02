@@ -1,6 +1,13 @@
 <?php
+Use Main\User;;
 
-$data = json_decode(file_get_contents('/opt/lampp/htdocs/grazus/Uzdaviniai/composer/app/data2.json'),1);
+$data = new App\DB\JsonDb;
+
+$data = $data->showAll();
+//sort($data);
+// //$data = $db->save();
+
+// _dc($data);
 
 ?>
 
@@ -70,20 +77,22 @@ button {
         // }
         // $data =sortdata($data);
         
-        foreach ($data as $user) {
+        foreach ($data as $key => $user) {
+           
             ?>
+
                 <tr>
                     <td><?=$user['name']?></td>
                     <td><?=$user['surname']?></td>
                     <td><?=$user['IBAN']?></td>
                     <td><?=$user['ID']?></td>
                     <td>
-                        <?php
+                        <?php 
                         echo '
-                        <form action="" method="post">
+                        <form action="'.Main\App::URL.'users/delete/'.$key.'" method="post"> 
                         <button type="submit" name="delete" value="'.$user['IBAN'].'">Trinti</button> 
                         </form>
-                        <form action="./addFunds.php" method="post">
+                        <form action="'.Main\App::URL.'users/addFunds/'.$key.'" method="post">
                             <input type="hidden" name="ID" value="'.$user['ID'].'"readonly>    
                             <button type="submit" name="inesti">Inesti</button>
                         </form>
@@ -95,42 +104,37 @@ button {
                     </td>
                 </tr>
         </div>
-        <?php
+    <?php
     }
-
     ?> 
 
 </table>
-
     <div class="menu" style="padding-top:200px;">
         <a href="./nauja_saskaita.php">Sukurti nauja saskaita</a><br>
         <a href="./saskaitu_sarasas2.php">Perziureti saskaitu sarasa <i class="text-icon icon-external-link"></i></a><br>
         <a href="./login.php?logout">Atsijungti</a><br>
     </div>
-
 </body>
-
 </html>
-
 <?php
 
-if(array_key_exists('delete', $_POST)){
-    foreach($data as $key => $value){
-        if($_POST['delete'] == $value['IBAN']){
-            if($value['lesos'] > 0){
-                $_SESSION['note'] = 'Istrinti ne tuscios saskaitos negalima';
-            }else{
-                unset($data[$key]);
-                // array_splice($data, $key, 1);
-                $_SESSION['note'] = 'Saskaita istrinta';
-                file_put_contents('/opt/lampp/htdocs/grazus/Uzdaviniai/composer/app/data2.json', json_encode($data));
+// if(array_key_exists('delete', $_POST)){
+//     foreach($data as $key => $value){
+//         if($_POST['delete'] == $value['IBAN']){
+//             if($value['lesos'] > 0){
+//                 $_SESSION['note'] = 'Istrinti ne tuscios saskaitos negalima';
+//             }else{
+//                 unset($data[$key]);
+//                 // array_splice($data, $key, 1);
+//                 $_SESSION['note'] = 'Saskaita istrinta';
+//                 file_put_contents('/opt/lampp/htdocs/grazus/Uzdaviniai/composer/app/data2.json', json_encode($data));
                 
-                header('Location: http://localhost:8080/grazus/Uzdaviniai/composer/public/users/list'); // GET
-                die();
-            }
-        }
-    }
-}
+//                 header('Location: http://localhost:8080/grazus/Uzdaviniai/composer/public/users/list'); // GET
+//                 die();
+//             }
+//         }
+//     }
+// }
 
 
 ?>

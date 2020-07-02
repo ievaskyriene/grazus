@@ -1,6 +1,9 @@
 <?php
-
-
+use App\DB\JsonDb;
+use Main\App;
+$duomenys = new JsonDb;
+$user = $duomenys->show(App::$user);
+_dc($user);
 // if (!isset($_SESSION['login']) || $_SESSION['login'] != 1) {
 //     header('Location: ./login.php');
 //     die();
@@ -84,7 +87,7 @@ menu{
             <td><?=$user['lesos']?></td>
             <td>
             <?php
-    echo '<form action="./addFunds" method="post">
+    echo '<form action="" method="post">
         <input type="hidden" name="ID" value="'.$user['ID'].'" readonly>
         <input type="number" name="prideti" value="">
         <button type="submit">Prideti</button>
@@ -112,7 +115,7 @@ menu{
 
 if(array_key_exists('prideti', $_POST)){
     foreach ($data as &$user) {
-        if($user['ID']== $_POST['ID']){
+        if($user== $_POST['ID']){
             $user['lesos']+=(int)$_POST['prideti'];   
         }
     }

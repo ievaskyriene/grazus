@@ -13,19 +13,19 @@ class App {
     private static $params = [];
 
     private static $guarded = ['slaptas-1', 'slaptas-2'];
-
+    public static $user;
     public static function start(){
         session_start();
         $param = str_replace(self::DIR, '', $_SERVER['REQUEST_URI']);
         self::$params = explode('/', $param);
-
-        if (count(self::$params) == 2) {
+        $db = new DB;
+        if (count(self::$params) == 2 || count(self::$params) == 3) {
             if (self::$params[0] == 'users') {
 
                 if (self::$params[1] == 'addUser') {
                    
                     $newUser = User::createNew();
-                    $db = new DB;
+                  
                     $db->create($newUser);
 
                     $_SESSION['note'] = 'Sukurta nauja saskaita'.'<br>'.'
@@ -36,25 +36,29 @@ class App {
                  
                 }
 
-            
-                // if (self::$params[1] == 'list') {
+                if (self::$params[1] == 'delete') {
+                    $db->delete(self::$params[2]);
+                    $_SESSION['note'] = 'Saskaita istrinta';
+                    App::redirect('users/list');
                  
-                //     require(self::VIEW_DIR.self::$params[0].'/'.self::$params[1].'.php');
-                // }
+                }
 
-                if (file_exists(self::VIEW_DIR.self::$params[0].'/'.self::$params[1].'.php')) {
+                if (self::$params[1] == 'addFunds') {
+                    self::$user = self::$params[2];
+                    $db->show(self::$user );
                     require(self::VIEW_DIR.self::$params[0].'/'.self::$params[1].'.php');
                 }
 
 
+                if (file_exists(self::VIEW_DIR.self::$params[0].'/'.self::$params[1].'.php')) {
+                    require(self::VIEW_DIR.self::$params[0].'/'.self::$params[1].'.php');
+                }
                
             }
         }
         elseif (count(self::$params) == 1) {
             if (self::$params[0] == 'doLogin') {
-
                 $login = new Login;
-    
                 if ($login->result()) {
                     self::redirect('users/create'); //redirectas i create turi buti
                 }
@@ -62,13 +66,11 @@ class App {
                     self::redirect('login');
                 }
             }
-
             if (in_array(self::$params[0], self::$guarded)) {
                 if (!Login::auth()){
                     self::redirect('login');
                 }
             }
-
             if (file_exists(self::VIEW_DIR.self::$params[0].'.php')) {
                 require(self::VIEW_DIR.self::$params[0].'.php');
             }
