@@ -2,6 +2,7 @@
 namespace Main;
 
 use App\DB\JsonDb;
+use Main\App;
 
 class Login
 {

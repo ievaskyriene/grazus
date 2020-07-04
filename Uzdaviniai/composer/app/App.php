@@ -12,13 +12,14 @@ class App {
     const URL = 'http://localhost:8080/grazus/Uzdaviniai/composer/public/';
     private static $params = [];
 
-    private static $guarded = ['slaptas-1', 'slaptas-2'];
+    private static $guarded = ['slaptas-1', 'addFunds', 'create', 'withdrawFunds', 'list',];
     public static $user = '';
     public static function start(){
         session_start();
         $param = str_replace(self::DIR, '', $_SERVER['REQUEST_URI']);
         self::$params = explode('/', $param);
         $db = new DB;
+
         if (count(self::$params) == 2 || count(self::$params) == 3) {
             if (self::$params[0] == 'users') {
 
@@ -47,37 +48,37 @@ class App {
                 if (self::$params[1] == 'withdrawFunds') {
                     self::$user = self::$params[2];
                     $db->show(self::$user );
-                   
                 }
-
 
 
                 if (self::$params[1] == 'add') {
                     if(!empty($_POST)){
                         self::$user = self::$params[2];
-                        
-                    Money::plus();
-                      
+                    Money::plus(); 
                     self::redirect('./../public/users/addFunds/'.self::$params[2]);
-
                     }
-            
                 }
 
 
                 if (self::$params[1] == 'deduct') {
                     if(!empty($_POST)){
                         self::$user = self::$params[2];
-                        
                     Money::minus();
-                      
                     self::redirect('./../public/users/withdrawFunds/'.self::$params[2]);
-
                     }
-            
                 }
             
+                if (in_array(self::$params[0], self::$guarded)) {
+                    if (!Login::auth()){
+                        self::redirect('./../public/login');
+                    }
+                } 
 
+                if (in_array(self::$params[1], self::$guarded)) {
+                    if (!Login::auth()){
+                        self::redirect('./../public/login');
+                    }
+                }
 
                 if (file_exists(self::VIEW_DIR.self::$params[0].'/'.self::$params[1].'.php')) {
                     require(self::VIEW_DIR.self::$params[0].'/'.self::$params[1].'.php');
@@ -92,21 +93,23 @@ class App {
                     self::redirect('users/create'); 
                 }
                 else {
-                    self::redirect('login');
+                    self::redirect('./../public/login');
                 }
             }
 
-            if (self::$params[1] == 'list') {
-                require('./../view/list.php');
-                 } else {
-                    self::redirect('login');
-                }
-            
 
             if (in_array(self::$params[0], self::$guarded)) {
                 if (!Login::auth()){
-                    self::redirect('login');
+                    self::redirect('./../public/login');
                 }
+            }
+
+            if (self::$params[0] == 'logout') {
+                session_destroy();
+                self::redirect('./../public/login');
+            }
+            if (file_exists(self::VIEW_DIR.self::$params[0].'.php')) {
+                require(self::VIEW_DIR.self::$params[0].'.php');
             }
 
         }
