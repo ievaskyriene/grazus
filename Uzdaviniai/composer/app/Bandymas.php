@@ -41,47 +41,39 @@ class App {
                 if (self::$params[1] == 'addFunds') {
                     self::$user = self::$params[2];
                     $db->show(self::$user );
-                    
+                    //require(self::VIEW_DIR.self::$params[0].'/'.self::$params[1].'.php');
                 }
-
-                if (self::$params[1] == 'withdrawFunds') {
-                    self::$user = self::$params[2];
-                    $db->show(self::$user );
-                   
-                }
-
-
 
                 if (self::$params[1] == 'add') {
                     if(!empty($_POST)){
                         self::$user = self::$params[2];
-                        
+                        //$db->show(self::$user );
                     Money::plus();
-                      
-                    self::redirect('./../public/users/addFunds/'.self::$params[2]);
 
+                //  if (self::$params[1] == 'list') {
+                //     require(self::VIEW_DIR.self::$params[0].'/'.self::$params[1].'.php');
+                // require('./../view/users/list.php');
+                //  } else {
+                //     self::redirect('login');
+                // }
+                    
+                    //require('./../view/users/addFunds');
+                //    header('Location: grazus/Uzdaviniai/composer/public/users/add'.$params[2]); //ciataisyti
+                //     die();
+
+                    }else{
+                        App::$user = $params[2];
+                        // self::$user = self::$params[2];
+                        // $db->show(self::$user );
+                        require('./../view/users/addFunds');
                     }
-            
-                }
-
-
-                if (self::$params[1] == 'deduct') {
-                    if(!empty($_POST)){
-                        self::$user = self::$params[2];
-                        
-                    Money::minus();
-                      
-                    self::redirect('./../public/users/withdrawFunds/'.self::$params[2]);
-
-                    }
-            
                 }
             
 
 
-                if (file_exists(self::VIEW_DIR.self::$params[0].'/'.self::$params[1].'.php')) {
-                    require(self::VIEW_DIR.self::$params[0].'/'.self::$params[1].'.php');
-                }
+                // if (file_exists(self::VIEW_DIR.self::$params[0].'/'.self::$params[1].'.php')) {
+                //     require(self::VIEW_DIR.self::$params[0].'/'.self::$params[1].'.php');
+                // }
                
             }
         }
@@ -89,7 +81,7 @@ class App {
             if (self::$params[0] == 'doLogin') {
                 $login = new Login;
                 if ($login->result()) {
-                    self::redirect('users/create'); 
+                    self::redirect('users/create'); //redirectas i create turi buti
                 }
                 else {
                     self::redirect('login');
@@ -109,6 +101,10 @@ class App {
                 }
             }
 
+
+            // if (file_exists(self::VIEW_DIR.self::$params[0].'.php')) {
+            //     require(self::VIEW_DIR.self::$params[0].'.php');
+            // }
         }
     }
     
@@ -123,6 +119,4 @@ class App {
         die();
     }
 }
-
-
 

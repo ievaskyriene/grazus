@@ -2,11 +2,9 @@
 Use Main\User;;
 
 $data = new App\DB\JsonDb;
-
 $data = $data->showAll();
 //sort($data);
 // //$data = $db->save();
-
 // _dc($data);
 
 ?>
@@ -80,7 +78,6 @@ button {
         foreach ($data as $key => $user) {
            
             ?>
-
                 <tr>
                     <td><?=$user['name']?></td>
                     <td><?=$user['surname']?></td>
@@ -96,7 +93,7 @@ button {
                             <input type="hidden" name="ID" value="'.$user['ID'].'"readonly>    
                             <button type="submit" name="inesti">Inesti</button>
                         </form>
-                        <form action="./nuimti_lesas.php" method="post">
+                        <form action="'.Main\App::URL.'users/withdrawFunds/'.$key.'" method="post">
                             <input type="hidden" name="ID" value="'.$user['ID'].'"readonly>    
                             <button type="submit" name="nuimti">Nuimti</button>
                         </form>';
@@ -117,24 +114,6 @@ button {
 </body>
 </html>
 <?php
-
-// if(array_key_exists('delete', $_POST)){
-//     foreach($data as $key => $value){
-//         if($_POST['delete'] == $value['IBAN']){
-//             if($value['lesos'] > 0){
-//                 $_SESSION['note'] = 'Istrinti ne tuscios saskaitos negalima';
-//             }else{
-//                 unset($data[$key]);
-//                 // array_splice($data, $key, 1);
-//                 $_SESSION['note'] = 'Saskaita istrinta';
-//                 file_put_contents('/opt/lampp/htdocs/grazus/Uzdaviniai/composer/app/data2.json', json_encode($data));
-                
-//                 header('Location: http://localhost:8080/grazus/Uzdaviniai/composer/public/users/list'); // GET
-//                 die();
-//             }
-//         }
-//     }
-// }
 
 
 ?>

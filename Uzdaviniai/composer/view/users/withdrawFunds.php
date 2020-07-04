@@ -2,11 +2,12 @@
 use App\DB\JsonDb;
 use Main\App;
 
-$db = new JsonDb;
-$user = $db->show(App::$user);
-_dc($user);
 
-_dc($_POST);
+_d(App::$user);
+$db = new JsonDb;
+
+$user = $db->show(App::$user);
+
 
 ?>
 <!DOCTYPE html>
@@ -65,7 +66,7 @@ menu{
         <th>Veiksmai</th>
     </div>
     <?php
-  
+    
         ?> 
             <tr>
             <td><?=$user['name']?></td>
@@ -74,10 +75,10 @@ menu{
             <td><?=$user['lesos']?></td>
             <td>
             <?php
-    echo '<form action="./../add/'.App::$user.'" method="post">
+    echo '<form action="./../deduct/'.App::$user.'" method="post">
         <input type="hidden" name="ID" value="'.$user['ID'].'" readonly>
-        <input type="number" name="prideti" value="">
-        <button type="submit">Prideti</button>
+        <input type="number" name="atimti" value="">
+        <button type="submit">Nuimti</button>
     </form>';
     ?>
     </td>
@@ -96,9 +97,4 @@ menu{
     </body>
 </html>
     
-
-<?php
-
-
-
 

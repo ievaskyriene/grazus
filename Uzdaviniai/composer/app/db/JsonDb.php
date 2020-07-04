@@ -33,12 +33,18 @@ class JsonDb implements DataBase
  
     public function update(string $userId, array $userData) : void
     {
-        
+        foreach ($this->data as $key => $value) {
+            if ($userId == $key) {
+                $this->data[$key] = $userData;
+            }
+        }
+        $this->save();
+       
     }
  
     public function delete(string $userId) : void
     {
-        _d("tatat");
+
         unset($this->data[$userId]);
         $this->save();
         
@@ -46,14 +52,11 @@ class JsonDb implements DataBase
  
     public function show(string $userId) : array
     {
-        $data = json_decode(file_get_contents('/opt/lampp/htdocs/grazus/Uzdaviniai/composer/app/data2.json'),1);
-        foreach ($data as $key => $user){
-
-            if($userId == $key){
-                
-                return $data[$key];
+        foreach ($this->data as $key => $value) {
+            if ($key == $userId) {
+                return $value;
             }
-        }   
+        }
     }
     
     public function showAll() : array

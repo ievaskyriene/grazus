@@ -1,16 +1,1 @@
-{
-  "0a9fd46d-0729-4ad4-8c01-6a12b64920a8": {
-    "name": "Ieva",
-    "surname": "Skyriene",
-    "ID": "50208010515",
-    "IBAN": "LT437300051436754392",
-    "lesos": 0
-  },
-  "1e47ab65-4935-4b87-963d-766b2f626c21": {
-    "name": "Jonas",
-    "surname": "Jonaitis",
-    "ID": "47611280515",
-    "IBAN": "LT277300052811467337",
-    "lesos": 0
-  }
-}
+{"0a9fd46d-0729-4ad4-8c01-6a12b64920a8":{"name":"Ieva","surname":"Skyriene","ID":"50208010515","IBAN":"LT437300051436754392","lesos":442},"1e47ab65-4935-4b87-963d-766b2f626c21":{"name":"Jonas","surname":"Jonaitis","ID":"47611280515","IBAN":"LT277300052811467337","lesos":567}}
