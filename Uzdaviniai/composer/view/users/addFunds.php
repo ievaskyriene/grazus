@@ -89,9 +89,11 @@ menu{
 </table>
 
 <div class="menu">
-        <a href="./nauja_saskaita.php">Sukurti nauja saskaita</a><br>
-        <a href="./saskaitu_sarasas2.php">Perziureti saskaitu sarasa <i class="text-icon icon-external-link"></i></a><br>
-        <a href="./login.php?logout">Atsijungti</a><br>
+<div class="menu" style="padding-top:200px;">
+        <a href="<?=Main\App::URL.'users/list'?>">Perziureti saskaitu sarasa <i class="text-icon icon-external-link"></i></a><br>
+        <a href="<?=Main\App::URL.'users/create/'?>">Sukurti nauja saskaita</a><br>
+        <a href="<?=Main\App::URL.'logout'?>">Atsijungti</a><br>
+    </div>
     </div>
     </body>
 </html>
