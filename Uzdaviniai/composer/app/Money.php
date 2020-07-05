@@ -15,7 +15,6 @@ class Money {
         } else {
             $_SESSION['note'] = '<span style="color:red;">Įveskite sumą - teigiamą skaičių</span>';
         }
-      
     }
 
     public static function minus(){

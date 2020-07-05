@@ -26,7 +26,6 @@ class JsonDb implements DataBase
        
         $uuid = (string) Uuid::uuid4();
         $this->data[$uuid] = $userData;
-       // $this->data[] = $userData;
         $this->save();
 
     }
@@ -44,9 +43,10 @@ class JsonDb implements DataBase
  
     public function delete(string $userId) : void
     {
-
+      
         unset($this->data[$userId]);
         $this->save();
+       
         
     }
  

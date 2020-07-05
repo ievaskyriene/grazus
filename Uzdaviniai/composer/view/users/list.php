@@ -105,6 +105,15 @@ button {
     }
     ?> 
 
+<p class = "message">
+<?php  
+    if(isset($_SESSION['note'])) {
+    echo $_SESSION['note'];
+    unset($_SESSION['note']);
+}
+?></p><br>
+?></p><br>
+
 </table>
     <div class="menu" style="padding-top:200px;">
         <a href="<?=Main\App::URL.'users/create/'?>">Sukurti nauja saskaita</a><br>

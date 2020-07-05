@@ -67,15 +67,14 @@ _dc ($_POST);
                 <label for="ID"> Asmens kodas:  <br>
                     <input type="number" name="asmenskodas" required><br>
                 </label>
-              
+
+                
                 <button type="submit" name = "action">Sukurti saskaita</button>
-                <!-- <label for="IBAN"> saskaita:  <br>
-                    <input type="number" name="asmenskodas" value = "<?=Generate::generateIBAN()?>"><br>
-                </label> -->
             </form>
         </div>
     </div>
 
+?></p><br>
     <div class="menu"  style="padding-top:200px;">
     <a href="<?=Main\App::URL.'users/list'?>">Perziureti saskaitu sarasa <i class="text-icon icon-external-link"></i></a><br>
     <a href="<?=Main\App::URL.'logout'?>">Atsijungti</a><br>

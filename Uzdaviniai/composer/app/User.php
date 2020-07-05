@@ -3,6 +3,8 @@ namespace Main;
 
 use Main\Validate;
 use Main\Generate;
+use Main\CE;
+
 
 class User
 {
@@ -46,7 +48,7 @@ class User
                 $_SESSION['note'] = 'Iveskite teisinga asmens koda';
                 App::redirect('users/create');
             }
-            //     _dc($_POST);
+
 
             $data = json_decode(file_get_contents('/opt/lampp/htdocs/grazus/Uzdaviniai/composer/app/data2.json'),1);
             _dc($data);
@@ -63,37 +65,12 @@ class User
             'surname' => $_POST['pavarde'],
             'ID' => $_POST['asmenskodas'],
             'IBAN' =>  Generate::generateIBAN(),
-            'lesos' => 0
+            'lesos' => 0,
+            'USD' => 0,
             ];
       
         }  
 
     }
-
-    // public static function delete(){
-
-    //     if(array_key_exists('delete', $_POST)){
-    //         foreach($data as $key => $value){
-    //             if($_POST['delete'] == $value['IBAN']){
-    //                 if($value['lesos'] > 0){
-    //                     $_SESSION['note'] = 'Istrinti ne tuscios saskaitos negalima';
-    //                 }else{
-    //                     unset($data[$key]);
-    //                     // array_splice($data, $key, 1);
-    //                     $_SESSION['note'] = 'Saskaita istrinta';
-    //                     file_put_contents('/opt/lampp/htdocs/grazus/Uzdaviniai/composer/app/data2.json', json_encode($data));
-                        
-    //                     header('Location: http://localhost:8080/grazus/Uzdaviniai/composer/public/users/list'); // GET
-    //                     die();
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-
-    // public static function showAll() : array
-    // {
-    //     showAll() 
-    // }
 
 }

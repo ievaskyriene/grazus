@@ -1,6 +1,7 @@
 <?php
 use App\DB\JsonDb;
 use Main\App;
+use Main\CE;
 
 $db = new JsonDb;
 $user = $db->show(App::$user);
@@ -62,9 +63,14 @@ menu{
         <th>Pavarde</th> 
         <th>Saskaita</th>
         <th>Lesos</th>
+        <th>Lesos USD</th>
         <th>Veiksmai</th>
     </div>
     <?php
+
+$USD = 0;
+$USD = $user['lesos'] * CE::excange();
+
   
         ?> 
             <tr>
@@ -72,6 +78,7 @@ menu{
             <td><?=$user['surname']?></td>
             <td><?=$user['IBAN']?></td>
             <td><?=$user['lesos']?></td>
+            <td><?=$USD?></td>
             <td>
             <?php
     echo '<form action="./../add/'.App::$user.'" method="post">
@@ -88,12 +95,18 @@ menu{
     ?> 
 </table>
 
-<div class="menu">
+<p class = "message">
+<?php  
+    if(isset($_SESSION['note'])) {
+    echo $_SESSION['note'];
+    unset($_SESSION['note']);
+}
+?></p><br>
+
 <div class="menu" style="padding-top:200px;">
         <a href="<?=Main\App::URL.'users/list'?>">Perziureti saskaitu sarasa <i class="text-icon icon-external-link"></i></a><br>
         <a href="<?=Main\App::URL.'users/create/'?>">Sukurti nauja saskaita</a><br>
         <a href="<?=Main\App::URL.'logout'?>">Atsijungti</a><br>
-    </div>
     </div>
     </body>
 </html>
