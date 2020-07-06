@@ -16,39 +16,9 @@ $data = $data->showAll();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./../../public/css/reset.css">
+    <link rel="stylesheet" href="./../../public/css/main.css">
 </head>
-<style>
-
-table{
-  font-family: 'Montserrat', sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-table td, table th {
- font-family: 'Montserrat', sans-serif;
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-table tr:hover {background-color: #ddd;}
-
-table th {
-  font-family: 'Montserrat', sans-serif;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #284646;
-  color: white;
-}
-
-button {
-    font-family: 'Montserrat', sans-serif;
-    width: 100px;
-}
-</style>
-
 <body>
 <table>
     <tr>
@@ -105,31 +75,21 @@ button {
     }
     ?> 
 
-<p class = "message">
+<div class = "message">
 <?php  
     if(isset($_SESSION['note'])) {
     echo $_SESSION['note'];
     unset($_SESSION['note']);
 }
-?></p><br>
-?></p><br>
+?></div><br>
 
 </table>
-    <div class="menu" style="padding-top:200px;">
-        <a href="<?=Main\App::URL.'users/create/'?>">Sukurti nauja saskaita</a><br>
+    <div class="menu">
+        <a href="<?=Main\App::URL.'users/create/'?>">Sukurti naują saskaitą</a><br>
         <a href="<?=Main\App::URL.'logout'?>">Atsijungti</a><br>
     </div>
 </body>
 </html>
 <?php
 
-
 ?>
-<div style="color:red">
-<?php
-if(isset($_SESSION['note'])) {
-    echo $_SESSION['note'];
-    unset($_SESSION['note']);
-}
-?>
-</div>

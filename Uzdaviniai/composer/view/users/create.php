@@ -1,7 +1,6 @@
 <?php
 
 use Main\Generate;
-_dc ($_POST);
 
 ?>
 
@@ -12,72 +11,64 @@ _dc ($_POST);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./../../public/css/reset.css">
+    <link rel="stylesheet" href="./../../public/css/main.css">
 </head>
-<style>
-    .container{
-        margin-left: 50px;
-        margin-top:50px;
-        font-family: 'Montserrat', sans-serif;
-    }
-    h2{
-        font-family: 'Montserrat', sans-serif;
-        font-weight: bold;
-    }
-    form{
-        font-family: 'Montserrat', sans-serif;
-    }
-    label{
-        font-family: 'Montserrat', sans-serif;
-    }
-    input{
-        font-family: 'Montserrat', sans-serif;
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-    button{
-        font-family: 'Montserrat', sans-serif;
-        font-weight: bold;
-    }
-    .message{
-        margin-top:20px;
-        margin-bottom:20px;
-        font-family: 'Montserrat', sans-serif;
-    }
-
-</style>
 <body>
     <div class="container">
         <div class="form">
-            <h2>Iveskite duomenis</h2>
-                <p class = "message"><?php  
-                   if(isset($_SESSION['note'])) {
-                    echo $_SESSION['note'];
-                    unset($_SESSION['note']);
-                }
-                ?></p><br>
-           <form action="<?= Main\App::URL ?>users/addUser" method="post">
-                <label for="name"> Vardas: <br>
-                    <input type="text" name="vardas" required> <br>
-                </label> 
-                <label for="surname"> Pavarde: <br>
-                    <input type="text" name="pavarde" required> <br>
-                </label>
+            <h2>Įveskite duomenis</h2>
+            <form action="<?= Main\App::URL ?>users/addUser" method="post">
+                <div class = "input">
+                    <label for="name"> Vardas: <br>
+                        <input type="text" name="vardas" required> <br>
+                    </label> 
+                </div>
+                <div class = "input">
+                    <label for="surname"> Pavardė: <br>
+                        <input type="text" name="pavarde" required> <br>
+                    </label>
+                </div>  
+                <div class = "input">
                 <label for="ID"> Asmens kodas:  <br>
                     <input type="number" name="asmenskodas" required><br>
                 </label>
-
-                
-                <button type="submit" name = "action">Sukurti saskaita</button>
+                </div>  
+                <button type="submit" name = "action">Sukurti saskaitą</button>
             </form>
-        </div>
-    </div>
 
-?></p><br>
-    <div class="menu"  style="padding-top:200px;">
-    <a href="<?=Main\App::URL.'users/list'?>">Perziureti saskaitu sarasa <i class="text-icon icon-external-link"></i></a><br>
-    <a href="<?=Main\App::URL.'logout'?>">Atsijungti</a><br>
-    </div>
+            <!-- <label for="img"> Įkelkite profilio nuotrauką:  <br>
+                <form action="" method="post" enctype="multipart/form-data">
+                    <input type="file" name="cat_photo"><br><br>
+                    <button type="submit">Įkelti</button>
+                </label>
+                </form> -->
+            <div class = "message"><?php  
+                if(isset($_SESSION['note'])) {
+                echo $_SESSION['note'];
+                unset($_SESSION['note']);
+            }
+                ?></div><br>
+            </div>  
+            <div class="menu">
+                <a href="<?=Main\App::URL.'users/list'?>">Peržiūrėti saskaitų sarasą <i class="text-icon icon-external-link"></i></a><br>
+                <a href="<?=Main\App::URL.'logout'?>">Atsijungti</a><br>
+            </div>
+    </div> 
 </body>
 </html>
+
+<?php
+// $target_file = basename($_FILES["cat_photo"]["name"]);
+// move_uploaded_file($_FILES["cat_photo"]["tmp_name"], '/opt/lampp/htdocs/grazus/Uzdaviniai/composer/img/kaciukas1.jpeg');
+
+// $cat = file_get_contents('/opt/lampp/htdocs/grazus/Uzdaviniai/composer/img/kaciukas1.jpeg');
+
+// // header('Content-type: image/png');
+
+// $cat1 = base64_encode($cat);
+// $catData = ['img'=>$cat1];
+// _dc($catData);
+
+// file_put_contents('/opt/lampp/htdocs/grazus/Uzdaviniai/composer/img/kaciuku.json', $catData);
+// _dc($_FILES);

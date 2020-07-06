@@ -34,22 +34,15 @@ class App {
                 }
 
                 if (self::$params[1] == 'delete') {
-                    $userkey = '';
                     $db = new DB;
                     $user =  $db->show(self::$params[2]);
                     if ($user['lesos'] == 0) {
-                        $db->delete($_POST['delete']);
+                        $db->delete(self::$params[2]);
                         $_SESSION['note'] = 'Ištrinta kliento sąskaita';
                     } else {
-                        $_SESSION['note'] = '<span style="color:red;">Sąskaitos, kurioje yra lėšų, ištrinti negalima</span>';
+                       $_SESSION['note'] = '<span style="color:red;">Sąskaitos, kurioje yra lėšų, ištrinti negalima!</span>';
                     }
-                    
                     self::redirect('users/list');
-
-
-                    // $db->delete(self::$params[2]);
-                    // $_SESSION['note'] = 'Saskaita istrinta';
-                    // App::redirect('users/list');
                 }
 
                 if (self::$params[1] == 'addFunds') {
@@ -103,7 +96,7 @@ class App {
             if (self::$params[0] == 'doLogin') {
                 $login = new Login;
                 if ($login->result()) {
-                    self::redirect('users/create'); 
+                    self::redirect('users/slaptas-1'); 
                 }
                 else {
                     self::redirect('./../public/login');
