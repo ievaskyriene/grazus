@@ -2,10 +2,9 @@
 Use Main\User;
 
 $data = new App\DB\JsonDb;
+
 $data = $data->showAll();
-//sort($data);
-// //$data = $db->save();
-// _dc($data);
+//$data = $data->sortData();
 
 ?>
 
@@ -26,25 +25,18 @@ $data = $data->showAll();
         <th>Pavarde</th> 
         <th>Saskaita</th>
         <th>Asmens kodas</th>
+        <th>Profilio nuotrauka</th> 
         <th>Veiksmai</th>
     <div>
         <?php
-        // function sortdata($arr){
-        //     for ($i=0; $i<count($arr)-1; $i++){
-            
-        //             for($j=$i+1; $j<count($arr); $j++){
-        //                 if($arr[$i]['surname'] > $arr[$j]['surname']){
-        //                     $temp = $arr[$i];
-        //                     $arr[$i] = $arr[$j];
-        //                     $arr[$j] = $temp;
-        //                 }
-        //             }
+            function surnameSort($a, $b) {
+                $aLast = $a['surname'];
+                $bLast = $b['surname'];
+                return strcasecmp($aLast, $bLast);
+            }
+            uasort($data, 'surnameSort');
+       
 
-        //     }
-        //     return $arr;
-        // }
-        // $data =sortdata($data);
-        
         foreach ($data as $key => $user) {
            
             ?>
@@ -53,6 +45,7 @@ $data = $data->showAll();
                     <td><?=$user['surname']?></td>
                     <td><?=$user['IBAN']?></td>
                     <td><?=$user['ID']?></td>
+                    <td><img style = "width: 200px; height: 200px; object-fit: cover;" src="<?=$user['img']?>">
                     <td>
                         <?php 
                         echo '

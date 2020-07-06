@@ -18,7 +18,7 @@ use Main\Generate;
     <div class="container">
         <div class="form">
             <h2>Įveskite duomenis</h2>
-            <form action="<?= Main\App::URL ?>users/addUser" method="post">
+            <form action="<?= Main\App::URL ?>users/addUser" enctype="multipart/form-data" method="post">
                 <div class = "input">
                     <label for="name"> Vardas: <br>
                         <input type="text" name="vardas" required> <br>
@@ -30,19 +30,19 @@ use Main\Generate;
                     </label>
                 </div>  
                 <div class = "input">
-                <label for="ID"> Asmens kodas:  <br>
-                    <input type="number" name="asmenskodas" required><br>
-                </label>
+                    <label for="ID"> Asmens kodas:  <br>
+                        <input type="number" name="asmenskodas" required><br>
+                    </label>
                 </div>  
+                <div class = "input">
+                    <label for="img"> Įkelkite profilio nuotrauką:  <br>
+                        <input style = "margin-left:80px; margin-top:20px;" type="file" name="cat_photo"><br><br>
+                    </label>
+                </div> 
                 <button type="submit" name = "action">Sukurti saskaitą</button>
             </form>
 
-            <!-- <label for="img"> Įkelkite profilio nuotrauką:  <br>
-                <form action="" method="post" enctype="multipart/form-data">
-                    <input type="file" name="cat_photo"><br><br>
-                    <button type="submit">Įkelti</button>
-                </label>
-                </form> -->
+             
             <div class = "message"><?php  
                 if(isset($_SESSION['note'])) {
                 echo $_SESSION['note'];
@@ -51,7 +51,7 @@ use Main\Generate;
                 ?></div><br>
             </div>  
             <div class="menu">
-                <a href="<?=Main\App::URL.'users/list'?>">Peržiūrėti saskaitų sarasą <i class="text-icon icon-external-link"></i></a><br>
+                <a href="<?=Main\App::URL.'users/list'?>">Peržiūrėti sąskaitų sarašą <i class="text-icon icon-external-link"></i></a><br>
                 <a href="<?=Main\App::URL.'logout'?>">Atsijungti</a><br>
             </div>
     </div> 
@@ -59,16 +59,6 @@ use Main\Generate;
 </html>
 
 <?php
-// $target_file = basename($_FILES["cat_photo"]["name"]);
-// move_uploaded_file($_FILES["cat_photo"]["tmp_name"], '/opt/lampp/htdocs/grazus/Uzdaviniai/composer/img/kaciukas1.jpeg');
 
-// $cat = file_get_contents('/opt/lampp/htdocs/grazus/Uzdaviniai/composer/img/kaciukas1.jpeg');
 
-// // header('Content-type: image/png');
 
-// $cat1 = base64_encode($cat);
-// $catData = ['img'=>$cat1];
-// _dc($catData);
-
-// file_put_contents('/opt/lampp/htdocs/grazus/Uzdaviniai/composer/img/kaciuku.json', $catData);
-// _dc($_FILES);

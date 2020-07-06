@@ -59,6 +59,15 @@ class User
                 }
             }
           
+            $target_file = basename($_FILES["cat_photo"]["name"]); //nuotrauka
+            move_uploaded_file($_FILES["cat_photo"]["tmp_name"], '/opt/lampp/htdocs/grazus/Uzdaviniai/composer/img/kaciukas1.jpeg');//nuotrauka
+            $cat = file_get_contents('/opt/lampp/htdocs/grazus/Uzdaviniai/composer/img/kaciukas1.jpeg');// nuotrauka
+            $cat1 = 'data:image/jpeg;base64,'.base64_encode($cat);
+            // _dc($cat1);
+            // $catData = [];
+            // $catData = [$cat1];
+           // file_put_contents('/opt/lampp/htdocs/grazus/Uzdaviniai/composer/img/kaciuku.json', json_encode($catData));
+
             return 
             [
             'name' => $_POST['vardas'], 
@@ -67,6 +76,7 @@ class User
             'IBAN' =>  Generate::generateIBAN(),
             'lesos' => 0,
             'USD' => 0,
+            'img' => $cat1,
             ];
       
         }  

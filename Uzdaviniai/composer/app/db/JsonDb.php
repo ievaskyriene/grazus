@@ -18,6 +18,7 @@ class JsonDb implements DataBase
             file_put_contents('/opt/lampp/htdocs/grazus/Uzdaviniai/composer/app/data2.json', json_encode([]));
         }
         $this->data = json_decode(file_get_contents('/opt/lampp/htdocs/grazus/Uzdaviniai/composer/app/data2.json'), 1);
+       
     }
 
     
@@ -65,22 +66,20 @@ class JsonDb implements DataBase
     {
         file_put_contents('/opt/lampp/htdocs/grazus/Uzdaviniai/composer/app/data2.json', json_encode($this->data));
     }
-
-    // public function sortdata($arr){
-    //         for ($i=0; $i<count($arr)-1; $i++){
-            
-    //                 for($j=$i+1; $j<count($arr); $j++){
-    //                     if($arr[$i]['surname'] > $arr[$j]['surname']){
-    //                         $temp = $arr[$i];
-    //                         $arr[$i] = $arr[$j];
-    //                         $arr[$j] = $temp;
-    //                     }
-    //                 }
-
-    //         }
-    //         return $arr;
-    // }
-        //$data =sortdata($data);
+  
+    function sortData(){
+        $this->data = $userData;
+        function surnameSort($a, $b) {
+            $aLast = $a['surname'];
+            $bLast = $b['surname'];
+            return strcasecmp($aLast, $bLast);
+        }
+        $sortedData =  uasort($this->data, 'surnameSort');
+        return $sortedData;
+       
+    }
+    
+     
 }
     
 

@@ -3,8 +3,6 @@ use App\DB\JsonDb;
 use Main\App;
 use Main\CE;
 
-
-_d(App::$user);
 $db = new JsonDb;
 
 $user = $db->show(App::$user);
@@ -48,7 +46,7 @@ $user = $db->show(App::$user);
             <?php
     echo '<form action="./../deduct/'.App::$user.'" method="post">
         <input type="hidden" name="ID" value="'.$user['ID'].'" readonly>
-        <input type="number" name="atimti" value="">
+        <input type="number" step="0.01" name="atimti" value="">
         <button type="submit">Nuimti</button>
     </form>';
     ?>

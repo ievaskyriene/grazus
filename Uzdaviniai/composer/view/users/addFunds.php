@@ -5,9 +5,6 @@ use Main\CE;
 
 $db = new JsonDb;
 $user = $db->show(App::$user);
-_dc($user);
-
-_dc($_POST);
 
 ?>
 <!DOCTYPE html>

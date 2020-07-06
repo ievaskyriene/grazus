@@ -4,6 +4,7 @@ namespace Main;
 use Main\Login;
 use Main\User;
 use App\DB\JsonDb as DB;
+use App\DB\CashasJsonDb as Cashas;
 
 
 class App {
@@ -18,6 +19,15 @@ class App {
         session_start();
         $param = str_replace(self::DIR, '', $_SERVER['REQUEST_URI']);
         self::$params = explode('/', $param);
+
+        $cashas = new Cashas;
+        $ceData = $cashas->showAll();
+        if (empty($ceData)) {
+            $cashas->create();
+        } else {
+            $cashas->update();
+        }
+
         $db = new DB;
 
         if (count(self::$params) == 2 || count(self::$params) == 3) {
