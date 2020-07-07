@@ -36,7 +36,7 @@ use Main\Generate;
                 </div>  
                 <div class = "input">
                     <label for="img"> Įkelkite profilio nuotrauką:  <br>
-                        <input style = "margin-left:80px; margin-top:20px;" type="file" name="cat_photo"><br><br>
+                        <input style = "margin-left:120px; margin-top:20px;" type="file" name="cat_photo"><br><br>
                     </label>
                 </div> 
                 <button type="submit" name = "action">Sukurti saskaitą</button>

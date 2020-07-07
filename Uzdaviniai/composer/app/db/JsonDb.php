@@ -67,16 +67,16 @@ class JsonDb implements DataBase
         file_put_contents('/opt/lampp/htdocs/grazus/Uzdaviniai/composer/app/data2.json', json_encode($this->data));
     }
   
-    function sortData(){
-        $this->data = $userData;
-        function surnameSort($a, $b) {
-            $aLast = $a['surname'];
-            $bLast = $b['surname'];
-            return strcasecmp($aLast, $bLast);
-        }
-        $sortedData =  uasort($this->data, 'surnameSort');
-        return $sortedData;
+    function sortData($data){
+        uasort($data, [$this,'surnameSort']);
+        return $data;
        
+    }
+
+     public function surnameSort($a, $b) {
+        $aLast = $a['surname'];
+        $bLast = $b['surname'];
+        return strcasecmp($aLast, $bLast);
     }
     
      

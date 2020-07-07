@@ -2,7 +2,7 @@
 
 .container {
   display: inline-block;
-  margin-left: calc((100% - 350px) / 2);
+  margin-left: calc((100% - 500px) / 2);
   margin-top: 50px;
   font-family: "Montserrat", sans-serif;
 }
@@ -34,6 +34,7 @@ h2 {
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
   margin-bottom: 50px;
+  word-break: keep-all;
 }
 form {
   font-family: "Montserrat", sans-serif;
@@ -51,7 +52,6 @@ label {
 
 input {
   font-family: "Montserrat", sans-serif;
-  margin-top: 0px;
 }
 
 button {

@@ -21,16 +21,16 @@ if(isset($_SESSION['note'])) {
 <body>
 <div class="container">
     <div class="form">
-    <h2>Įveskite prisijungimo duomenis</h2>
+        <h2 style="word-break: keep-all;">Įveskite prisijungimo duomenis</h2>
         <form action="<?= Main\App::URL ?>doLogin" method="post">
             <div class = "input">
                 <label for="name"> Įveskite vardą: <br>
-                    <input type="text" name="user"><br>
+                    <input style = "margin-top: 20px;" type="text" name="user"><br>
                 </label>
             </div>
             <div class = "input">
                 <label for="name"> Įveskite slaptažodį: <br>
-                    <input type="password" name="password"><br>
+                    <input style = "margin-top: 20px;" type="password" name="password"><br>
                 </label>
             </div>   
             <button type="submit">Jungtis</button>

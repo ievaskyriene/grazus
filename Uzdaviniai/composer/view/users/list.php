@@ -1,10 +1,10 @@
 <?php
 Use Main\User;
 
-$data = new App\DB\JsonDb;
+$data1 = new App\DB\JsonDb;
 
-$data = $data->showAll();
-//$data = $data->sortData();
+$data = $data1->showAll();
+$data = $data1->sortData($data);
 
 ?>
 
@@ -29,12 +29,12 @@ $data = $data->showAll();
         <th>Veiksmai</th>
     <div>
         <?php
-            function surnameSort($a, $b) {
-                $aLast = $a['surname'];
-                $bLast = $b['surname'];
-                return strcasecmp($aLast, $bLast);
-            }
-            uasort($data, 'surnameSort');
+            // function surnameSort($a, $b) {
+            //     $aLast = $a['surname'];
+            //     $bLast = $b['surname'];
+            //     return strcasecmp($aLast, $bLast);
+            // }
+            // uasort($data, 'surnameSort');
        
 
         foreach ($data as $key => $user) {
