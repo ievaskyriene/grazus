@@ -10,7 +10,6 @@ class JsonDb implements DataBase
 
     private $data;
 
-
     public function __construct()
     {
   
