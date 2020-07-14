@@ -28,6 +28,15 @@ class JsonDb implements DataBase
              throw new \PDOException($e->getMessage(), (int)$e->getCode());
         }
     }
+
+    public function uniqueId($userID) : bool {
+    
+        $sql = "SELECT * FROM bankas WHERE ID = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$userID]);
+        return empty($stmt->fetchAll())?true:false;
+        
+    }
    
 
     public function create(array $userData) : void {

@@ -33,22 +33,26 @@ class User
         return $valid;
     }
 
+    // public static function uniqueId(){
 
-  
-    // public static function validateId(){
     //     $data1 = new DB;
     //     $data = $data1->showAll();
     //     _dc($data);
-
     //     foreach($data as $value){
+    //         $unikalusID = false;
     //         if($value['ID'] == $_POST['ID']){
-    //             $uniqueId = false;
+    //             $unikalusID = false;
+    //         }else{
+    //             $unikalusID = true;
     //         }
     //     }
-    //     return true;
+    //     _dc($unikalusID);
+    //    return $unikalusID;
+     
     // }
 
     public static function createNew(){
+        $db = new DB;
         if(isset($_POST["action"]) && !empty($_POST)) {
             if(strlen($_POST['vardas'])<3){
                 $_SESSION['note'] = 'Iveskite teisinga varda';
@@ -63,13 +67,11 @@ class User
                 $_SESSION['note'] = 'Iveskite teisinga asmens koda';
                 App::redirect('users/create');
             }
-            // if(self::validateId() != true){
-            //     $_SESSION['note'] = 'Toks asmens kodas jau yra';
-            //     App::redirect('users/create');
-            // }
+            if($db->uniqueId($_POST['asmenskodas']) != true){
+                $_SESSION['note'] = 'Toks asmens kodas jau yra';
+                App::redirect('users/create');
+            }
 
-       
-         
             // foreach($data as $user){
             //     if($user['ID'] == $_POST['asmenskodas'] && self::validateId()){
             //         $_SESSION['note'] = 'Toks asmens kodas jau yra';

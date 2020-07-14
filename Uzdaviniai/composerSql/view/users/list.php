@@ -4,7 +4,6 @@ Use Main\User;
 $data1 = new App\DB\JsonDb;
 
 $data = $data1->showAll();
-_dc($data);
 $data = $data1->sortData($data);
 
 ?>
