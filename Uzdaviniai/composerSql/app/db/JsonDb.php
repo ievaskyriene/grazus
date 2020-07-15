@@ -10,7 +10,7 @@ class JsonDb implements DataBase
     private $pdo;
 
     public function __construct()
-    {
+    {        
         $host = 'localhost';
         $db   = 'bankas';
         $user = 'root';
